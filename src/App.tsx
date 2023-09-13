@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 
-import { CardRepo, IRepor, FormSearch } from './components'
+import { CardRepo, IRepor } from './components'
 
 import './App.css';
 
-function App() {
+
+function App() {  
+
+
     const [repositories, setRepositories] = useState<IRepor[]>([])
 
     useEffect(() => {
@@ -15,12 +18,7 @@ function App() {
     }, [])
 
     return (
-        <>
-            <div className='formCenter'>
-                <FormSearch 
-                    
-                />
-            </div>            
+        <>         
             <div className='cardWrap'>
                 {repositories.map((repo) => (
                     <CardRepo
