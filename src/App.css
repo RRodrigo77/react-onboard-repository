@@ -13,8 +13,8 @@
 .card {
   width: 30%;
   border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
 
   margin: 16px 8px;
   padding: 5px;
@@ -28,4 +28,19 @@
 .formCenter {  
   align-items: center;
   padding: 10px;
+}
+
+.cardTop{
+  align-items: center;
+  padding: 30px;
+  border: 1px solid gray;
+  border-radius: 15px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+  margin: 28px;
+
+}
+
+.ImputCard{
+  border-radius: 25px;
+  display: block;
 }
