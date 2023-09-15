@@ -17,6 +17,7 @@ function App() {
             fetch(`https://api.github.com/users/${input}/repos`)
                 .then(result => {
                     if (!result.ok) {
+                        alert('Não foi possível obter os repositórios do GitHub.')
                         throw new Error('Não foi possível obter os repositórios do GitHub.');
                     }
                     return result.json();
@@ -25,6 +26,7 @@ function App() {
                 .catch(error => console.log(error));
         } catch (error) {
             console.error('Ocorreu um erro ao buscar os repositórios:', error);
+            alert('Ocorreu um erro ao buscar os repositórios:')
         }
     }, [input]);
 
@@ -35,7 +37,7 @@ function App() {
                     <legend>Pesquisar repositórios:</legend>
                     <div className='ImputCard'>
                         <input type="text" value={inputText} onChange={e => setInputText(e.target.value)} placeholder='Pesquisar pelo github' />
-                        <button onClick={handleAdd}>Inserir...</button> {/* Botão para inserir a informação */}
+                        <button onClick={handleAdd}> Pesquisar </button> {/* Botão para inserir a informação */}
                     </div>
                 </div>
             </div>
