@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,KeyboardEvent } from 'react';
 import { CardRepo, IRepor } from './components';
 import './App.css';
 
@@ -30,13 +30,25 @@ function App() {
         }
     }, [input]);
 
+    function handleKeyPress(event: KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            handleAdd(); // Chama a função handleAdd a ser chamada com o enter
+        }
+    }
+
     return (
         <>
             <div>
                 <div className='cardTop'>
                     <legend>Pesquisar repositórios:</legend>
                     <div className='ImputCard'>
-                        <input type="text" value={inputText} onChange={e => setInputText(e.target.value)} placeholder='Pesquisar pelo github' />
+                        <input 
+                            type="text" 
+                            value={inputText} 
+                            onChange={e => setInputText(e.target.value)} 
+                            placeholder='Pesquisar pelo github'
+                            onKeyDown={handleKeyPress} 
+                        />
                         <button onClick={handleAdd}> Pesquisar </button> {/* Botão para inserir a informação */}
                     </div>
                 </div>
