@@ -1,35 +1,32 @@
 import { useEffect, useState } from 'react';
-
-import Button from 'react-bootstrap/Button';
-
 import { CardRepo, IRepor } from './components';
-
 import './App.css';
 
-
 function App() {
-
-
-
-    //const [inputext, setInputext] = useState('RRodrigo77')
-    const [input, setInput] = useState('RRodrigo77')
+    const [input, setInput] = useState('RRodrigo77');
+    const [inputText, setInputText] = useState(''); // Estado para armazenar o valor da string a ser inserida
 
     function handleAdd() {
-        setInput(input)
-        setInput('')
+        setInput(inputText); // Define o valor do input com base no estado inputText
     }
 
+    const [repositories, setRepositories] = useState<IRepor[]>([]);
 
-
-    const [repositories, setRepositories] = useState<IRepor[]>([])
-
-    useEffect(() => {        
+    useEffect(() => {
+        try {
             fetch(`https://api.github.com/users/${input}/repos`)
-                .then(result => result.json())
+                .then(result => {
+                    if (!result.ok) {
+                        throw new Error('Não foi possível obter os repositórios do GitHub.');
+                    }
+                    return result.json();
+                })
                 .then((dados) => setRepositories(dados))
-                .catch(error => console.log(error))        
-    }, [input])
-
+                .catch(error => console.log(error));
+        } catch (error) {
+            console.error('Ocorreu um erro ao buscar os repositórios:', error);
+        }
+    }, [input]);
 
     return (
         <>
@@ -37,13 +34,8 @@ function App() {
                 <div className='cardTop'>
                     <legend>Pesquisar repositórios:</legend>
                     <div className='ImputCard'>
-                        <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder='Pesquisar pelo github' />
-                        <Button
-                            variant="primary"
-                            onClick={handleAdd}
-                        >
-                            Pesquisar
-                        </Button>
+                        <input type="text" value={inputText} onChange={e => setInputText(e.target.value)} placeholder='Pesquisar pelo github' />
+                        <button onClick={handleAdd}>Inserir...</button> {/* Botão para inserir a informação */}
                     </div>
                 </div>
             </div>
